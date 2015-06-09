@@ -1,18 +1,18 @@
 ﻿/* jshint devel:true */
 'use strict';
 
-function DataBinder($table) {
-    this.$table = $table;
+function DataBinder() {
     this.cells = [];
-    this.inputs = $table.find('input');
 }
 
 DataBinder.prototype = {
-    initialize: function() {
+    initialize: function($table) {
         var rows = 100;
         var columns = 100;
+        this.$table = $table;
+        this.inputs = $table.find('input');
         this._initializeCellsArray(rows, columns);
-        this._bindInputsToArray();
+        this._bindInputsToArray(); 
         this._bindRefreshButton();
     },
     _initializeCellsArray: function(rows, columns) {
@@ -52,5 +52,8 @@ DataBinder.prototype = {
     },
     _notifyCellChange: function(rowNumber, columnNumber, value) {
         this.inputs.eq((rowNumber - 1) * 100 + columnNumber - 1).val(value);
+    },
+    getCellAt: function(rowNumber, columnNumber) {
+        return this.cells[rowNumber - 1][columnNumber - 1];
     }
 };
