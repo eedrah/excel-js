@@ -4,6 +4,7 @@
 function DataBinder($table) {
     this.$table = $table;
     this.cells = [];
+    this.inputs = $table.find('input');
 }
 
 DataBinder.prototype = {
@@ -22,11 +23,23 @@ DataBinder.prototype = {
             this.cells.push(row);
         }
     },
-    _bindInputsToArray: function() {
-
+    _bindInputsToArray: function () {
+        this.inputs.change(this, function notifyCellOfChange(event) {
+            var dataBinder = event.data;
+            var $this = $(this);
+            var row = $this.closest('tr').index();
+            var column = $this.closest('td').index();
+            dataBinder.cells[row][column].notifyChange($this.val());
+        });
     }
 };
 
 function Cell() {
     
+}
+
+Cell.prototype = {
+    notifyChange: function(newValue) {
+        console.log(newValue);
+    }
 }
