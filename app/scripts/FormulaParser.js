@@ -8,10 +8,11 @@ function FormulaParser(fnToOtherCells) {
 }
 
 FormulaParser.prototype = {
-    parse: function(formula) {
-        this.compute(formula);
+    parse: function (formula) {
+        formula = this._replaceCellReferences(formula);
+        this._compute(formula);
     },
-    compute: function(formula) {
+    _compute: function (formula) {
         try {
             var value = math.eval(formula);
             this.isValid = true;
@@ -20,5 +21,8 @@ FormulaParser.prototype = {
             // math.js error - generic error type
             // keep isValid == false
         }
+    },
+    _replaceCellReferences: function (formula) {
+        return formula;
     }
 };
