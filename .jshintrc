@@ -21,6 +21,9 @@
         "ReferenceHelper": true,
         "TableBuilder": true,
         "DataBinder": true,
-        "Cell": true
+        "Cell": true,
+        "dataBinder": true,
+        "FormulaParser": true,
+        "math": false
     }
 }
