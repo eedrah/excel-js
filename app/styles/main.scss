@@ -60,6 +60,18 @@ $icon-font-path: '../fonts/';
     border-top: 1px solid #e5e5e5;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
 ///* Space out content a bit */
 //body {
 //  padding-top: 20px;
