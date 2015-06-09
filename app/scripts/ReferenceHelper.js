@@ -31,7 +31,7 @@ var ReferenceHelper = (function () {
         return {
             row: lettersAndDigits[1],
             column: alphaToNumeric(lettersAndDigits[0])
-        }
+        };
     }
 
     return {

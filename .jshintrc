@@ -24,6 +24,7 @@
         "Cell": true,
         "dataBinder": true,
         "FormulaParser": true,
-        "math": false
+        "math": false,
+        "Formatter": true
     }
 }

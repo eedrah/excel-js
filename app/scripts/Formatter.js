@@ -1,8 +1,11 @@
-﻿function Formatter() {
+﻿/* jshint devel:true */
+'use strict';
+
+function Formatter() {
 }
 
 Formatter.prototype = {
-    bindButtons: function () {
+    bindButtons: function() {
         $('#boldBtn').click(this.makeLastCellBold);
         $('#italicBtn').click(this.makeLastCellItalic);
         $('#underlineBtn').click(this.makeLastCellUnderline);
@@ -14,13 +17,13 @@ Formatter.prototype = {
         $('input').removeClass('selected-cell');
         $(e.currentTarget).addClass('selected-cell');
     },
-    makeLastCellBold: function () {
+    makeLastCellBold: function() {
         $('.selected-cell').toggleClass('bold');
     },
-    makeLastCellItalic: function () {
+    makeLastCellItalic: function() {
         $('.selected-cell').toggleClass('italic');
     },
-    makeLastCellUnderline: function () {
+    makeLastCellUnderline: function() {
         $('.selected-cell').toggleClass('underline');
     }
-}
+};
