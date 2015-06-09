@@ -49,6 +49,8 @@ $icon-font-path: '../fonts/';
 
         input {
             border-width: 1px;
+            overflow: hidden;
+            width: 120px;
         }
     }
 }
