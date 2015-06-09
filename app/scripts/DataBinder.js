@@ -47,10 +47,10 @@ DataBinder.prototype = {
     },
     createNotificationCallback: function(rowNumber, columnNumber) {
         return function(value) {
-            this.notifyCellChange(rowNumber, columnNumber, value);
+            this._notifyCellChange(rowNumber, columnNumber, value);
         }.bind(this);
     },
-    notifyCellChange: function(rowNumber, columnNumber, value) {
+    _notifyCellChange: function(rowNumber, columnNumber, value) {
         this.inputs.eq((rowNumber - 1) * 100 + columnNumber - 1).val(value);
     }
 };
