@@ -8,17 +8,19 @@ function DataBinder($table) {
 }
 
 DataBinder.prototype = {
-    Initialize: function() {
+    initialize: function() {
         var rows = 100;
         var columns = 100;
         this._initializeCellsArray(rows, columns);
         this._bindInputsToArray();
+        this._bindRefreshButton();
     },
     _initializeCellsArray: function(rows, columns) {
-        for (var i = 0; i < rows; i++) {
+        for (var r = 0; r < rows; r++) {
             var row = [];
-            for (var j = 0; j < columns; j++) {
-                row.push(new Cell());
+            for (var c = 0; c < columns; c++) {
+                var notificationCallback = this.createNotificationCallback(r, c);
+                row.push(new Cell(r, c, notificationCallback));
             }
             this.cells.push(row);
         }
@@ -29,17 +31,26 @@ DataBinder.prototype = {
             var $this = $(this);
             var row = $this.closest('tr').index();
             var column = $this.closest('td').index();
-            dataBinder.cells[row][column].notifyChange($this.val());
+            dataBinder.cells[row][column].notifyInputChange($this.val());
         });
+    },
+    _bindRefreshButton: function() {
+        $('#refreshTable').click(this.refreshAllCells.bind(this));
+    },
+    refreshAllCells: function() {
+        this.inputs.val('');
+        this.cells.forEach(function refreshRow(row) {
+            row.forEach(function refreshCell(cell) {
+                cell.broadcastValue();
+            });
+        });
+    },
+    createNotificationCallback: function(rowNumber, columnNumber) {
+        return function(value) {
+            this.notifyCellChange(rowNumber, columnNumber, value);
+        }.bind(this);
+    },
+    notifyCellChange: function(rowNumber, columnNumber, value) {
+        this.inputs.eq((rowNumber - 1) * 100 + columnNumber - 1).val(value);
     }
 };
-
-function Cell() {
-    
-}
-
-Cell.prototype = {
-    notifyChange: function(newValue) {
-        console.log(newValue);
-    }
-}

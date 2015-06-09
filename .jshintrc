@@ -20,6 +20,7 @@
     "globals": {
         "ReferenceHelper": true,
         "TableBuilder": true,
-        "DataBinder":  true
+        "DataBinder": true,
+        "Cell": true
     }
 }
