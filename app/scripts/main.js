@@ -1,10 +1,23 @@
 /* jshint devel:true */
 'use strict';
 
-function buildTable() {
-    console.log('building');
+function TableBuilder($table) {
+    this.$table = $table;
 }
 
+TableBuilder.prototype = {
+    build: function() {
+        this.addHeaderRow();
+        this.addDataRows();
+    },
+    addHeaderRow: function() {
+        console.log('header');
+    },
+    addDataRows: function() {
+        console.log('data');
+    }
+};
+
 $(function startApplication() {
-    buildTable();
+    (new TableBuilder()).build();
 });
