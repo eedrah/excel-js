@@ -26,9 +26,11 @@ var ReferenceHelper = (function () {
     }
 
     function a1ToRc(cellReference) {
+        var digits = /(\d+)/;
+        var lettersAndDigits = cellReference.split(digits);
         return {
-            row: 1,
-            column: 1
+            row: lettersAndDigits[1],
+            column: alphaToNumeric(lettersAndDigits[0])
         }
     }
 
