@@ -11,16 +11,39 @@ function Cell(rowNumber, columnNumber, notificationCallback) {
 }
 
 Cell.prototype = {
-    notifyInputChange: function(newValue) {
-        this.setValue(newValue);
+    notifyInputChange: function (newEntry) {
+        if (newEntry[0] === '=') {
+            this.setFormula(newEntry.slice(1));
+        } else {
+            this.setValue(newEntry);
+        }
     },
-    setValue: function(newValue) {
+    setValue: function (newValue) {
         if (newValue !== this._value) {
             this._value = newValue;
             this.broadcastValue();
         }
     },
-    broadcastValue: function() {
+    broadcastValue: function () {
         this.notificationCallback(this._value);
+    },
+    setFormula: function (newFormula) {
+        var parser = new FormulaParser();
+        parser.parse(newFormula);
+        if (parser.isValid) {
+            this.setValue(parser.value);
+        } else {
+            this.setValue('#Error');
+        }
     }
 };
+
+function FormulaParser() {
+    this.isValid = false;
+    this.value = null;
+}
+FormulaParser.prototype = {
+    parse: function() {
+        
+    }
+}
