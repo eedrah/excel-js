@@ -13,10 +13,20 @@ DataBinder.prototype = {
         this._initializeCellsArray(rows, columns);
         this._bindInputsToArray();
     },
-    _initializeCellsArray: function() {
-
+    _initializeCellsArray: function(rows, columns) {
+        for (var i = 0; i < rows; i++) {
+            var row = [];
+            for (var j = 0; j < columns; j++) {
+                row.push(new Cell());
+            }
+            this.cells.push(row);
+        }
     },
     _bindInputsToArray: function() {
 
     }
 };
+
+function Cell() {
+    
+}
