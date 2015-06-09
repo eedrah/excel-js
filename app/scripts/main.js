@@ -1,2 +1,10 @@
 /* jshint devel:true */
-console.log('\'Allo \'Allo!');
+'use strict';
+
+function buildTable() {
+    console.log('building');
+}
+
+$(function startApplication() {
+    buildTable();
+});
