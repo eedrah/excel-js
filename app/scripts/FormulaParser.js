@@ -4,13 +4,16 @@
 function FormulaParser(fnToOtherCells) {
     this.fnToOtherCells = fnToOtherCells;
     this.isValid = false;
+    this.isDetermined = false;
     this.value = null;
 }
 
 FormulaParser.prototype = {
     parse: function (formula) {
         formula = this._replaceCellReferences(formula);
-        this._compute(formula);
+        if (this.isDetermined !== true) {
+            this._compute(formula);
+        }
     },
     _compute: function (formula) {
         try {
@@ -23,6 +26,16 @@ FormulaParser.prototype = {
         }
     },
     _replaceCellReferences: function (formula) {
-        return formula;
+        var cellReference = /\b([A-Z]+[0-9]+)\b/g;
+        var dividedFormula = formula.split(cellReference);
+        for (var i = 1; i < dividedFormula.length; i += 2) {
+            dividedFormula[i] = this._replaceCellReference(dividedFormula[i]);
+        }
+        return dividedFormula.join('');
+    },
+    _replaceCellReference: function(cellReference) {
+        var rowColumn = ReferenceHelper.A1ToRC(cellReference);
+        var cell = this.fnToOtherCells(rowColumn.row, rowColumn.column);
+        return cell.getValue();
     }
 };

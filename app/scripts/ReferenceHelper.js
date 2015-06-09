@@ -17,5 +17,15 @@ var ReferenceHelper = (function () {
         return otherLetters + lastLetter;
     }
 
-    return { NumericToAlpha: numericToAlpha };
+    function a1ToRc(cellReference) {
+        return {
+            row: 1,
+            column: 1
+        }
+    }
+
+    return {
+        NumericToAlpha: numericToAlpha,
+        A1ToRC: a1ToRc
+    };
 })();

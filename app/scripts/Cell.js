@@ -38,5 +38,8 @@ Cell.prototype = {
         } else {
             this.setValue('#Error');
         }
+    },
+    getValue: function() {
+        return this._value;
     }
 };
