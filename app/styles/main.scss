@@ -31,6 +31,9 @@ $icon-font-path: '../fonts/';
 
 .table-wrapper {
     width: 95%;
+    overflow: scroll;
+    margin: 0 auto;
+    height: 500px;
 
     table {
         margin: 0 auto;
