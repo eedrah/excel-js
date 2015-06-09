@@ -30,17 +30,21 @@ $icon-font-path: '../fonts/';
 }
 
 .table-wrapper {
-        width: 95%;
-
+    width: 95%;
 
     table {
         margin: 0 auto;
 
         th {
-            background-color: #AAA;
+            @extend input;
+            background-color: #CCC;
+            border: 1px solid black;
+            font-weight: bold;
+            text-align: center;
         }
-        td {
-            border: 1px solid #CCC;
+
+        input {
+            border-width: 1px;
         }
     }
 }
