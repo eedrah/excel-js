@@ -1,7 +1,8 @@
 ﻿/* jshint devel:true */
 'use strict';
 
-function FormulaParser() {
+function FormulaParser(fnToOtherCells) {
+    this.fnToOtherCells = fnToOtherCells;
     this.isValid = false;
     this.value = null;
 }

@@ -6,6 +6,9 @@ function Cell(rowNumber, columnNumber, notificationCallback) {
     this.column = columnNumber;
     this.notificationCallback = notificationCallback;
 
+    // this is terrible, but time is running out
+    this.fnToOtherCells = dataBinder.getCellAt.bind(dataBinder);
+
     this._formula = '';
     this._value = '';
 }
@@ -28,7 +31,7 @@ Cell.prototype = {
         this.notificationCallback(this._value);
     },
     setFormula: function (newFormula) {
-        var parser = new FormulaParser();
+        var parser = new FormulaParser(this.fnToOtherCells);
         parser.parse(newFormula);
         if (parser.isValid) {
             this.setValue(parser.value);
