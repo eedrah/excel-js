@@ -17,6 +17,14 @@ var ReferenceHelper = (function () {
         return otherLetters + lastLetter;
     }
 
+    function alphaToNumeric(alpha) {
+        var total = letterArray.indexOf(alpha.slice(-1)) + 1;
+        if (alpha.length > 1) {
+            total += 26 * alphaToNumeric(alpha.slice(0, -1));
+        }
+        return total;
+    }
+
     function a1ToRc(cellReference) {
         return {
             row: 1,
@@ -26,6 +34,7 @@ var ReferenceHelper = (function () {
 
     return {
         NumericToAlpha: numericToAlpha,
-        A1ToRC: a1ToRc
+        A1ToRC: a1ToRc,
+        AlphaToNumeric: alphaToNumeric
     };
 })();
