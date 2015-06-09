@@ -2,8 +2,15 @@
 'use strict';
 
 var ReferenceHelper = (function () {
-    function NumericToAlpha() {
-        return 'A';
+    var letterArray = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    function NumericToAlpha(number) {
+        if (number === 0){return ""}
+        var zeroIndexed = number - 1;
+        var lastLetter = letterArray[zeroIndexed % letterArray.length];
+        var remainder = Math.floor(zeroIndexed / 26);
+        var otherLetters = NumericToAlpha(remainder);
+        return otherLetters + lastLetter;
     }
 
     return { NumericToAlpha: NumericToAlpha };
