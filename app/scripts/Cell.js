@@ -11,7 +11,7 @@ function Cell(rowNumber, columnNumber, notificationCallback) {
 }
 
 Cell.prototype = {
-    notifyInputChange: function (newValue) {
+    notifyInputChange: function(newValue) {
         this.setValue(newValue);
     },
     setValue: function(newValue) {
@@ -23,4 +23,4 @@ Cell.prototype = {
     broadcastValue: function() {
         this.notificationCallback(this._value);
     }
-}
+};
