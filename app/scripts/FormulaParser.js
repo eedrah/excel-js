@@ -6,6 +6,7 @@ function FormulaParser(fnToOtherCells) {
     this.isValid = false;
     this.isDetermined = false;
     this.value = null;
+    this.precedents = [];
 }
 
 FormulaParser.prototype = {
@@ -26,16 +27,18 @@ FormulaParser.prototype = {
         }
     },
     _replaceCellReferences: function (formula) {
-        var cellReference = /\b([A-Z]+[0-9]+)\b/g;
+        var cellReference = /\b([A-Z]+[0-9]+)\b/gi;
         var dividedFormula = formula.split(cellReference);
         for (var i = 1; i < dividedFormula.length; i += 2) {
             dividedFormula[i] = this._replaceCellReference(dividedFormula[i]);
         }
         return dividedFormula.join('');
     },
-    _replaceCellReference: function(cellReference) {
+    _replaceCellReference: function (cellReference) {
+        cellReference = cellReference.toUpperCase();
         var rowColumn = ReferenceHelper.A1ToRC(cellReference);
         var cell = this.fnToOtherCells(rowColumn.row, rowColumn.column);
+        this.precedents.push(cell);
         return cell.getValue();
     }
 };
