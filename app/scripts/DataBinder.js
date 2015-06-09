@@ -16,11 +16,11 @@ DataBinder.prototype = {
         this._bindRefreshButton();
     },
     _initializeCellsArray: function(rows, columns) {
-        for (var r = 0; r < rows; r++) {
+        for (var row0Indexed = 0; row0Indexed < rows; row0Indexed++) {
             var row = [];
-            for (var c = 0; c < columns; c++) {
-                var notificationCallback = this.createNotificationCallback(r, c);
-                row.push(new Cell(r, c, notificationCallback));
+            for (var col0Indexed = 0; col0Indexed < columns; col0Indexed++) {
+                var notificationCallback = this.createNotificationCallback(row0Indexed, col0Indexed);
+                row.push(new Cell(row0Indexed, col0Indexed, notificationCallback));
             }
             this.cells.push(row);
         }
@@ -29,9 +29,9 @@ DataBinder.prototype = {
         this.inputs.change(this, function notifyCellOfChange(event) {
             var dataBinder = event.data;
             var $this = $(this);
-            var row = $this.closest('tr').index();
-            var column = $this.closest('td').index();
-            dataBinder.cells[row][column].notifyInputChange($this.val());
+            var row1Indexed = $this.closest('tr').index();
+            var column1Indexed = $this.closest('td').index();
+            dataBinder.cells[row1Indexed - 1][column1Indexed - 1].notifyInputChange($this.val());
         });
     },
     _bindRefreshButton: function() {
@@ -45,15 +45,15 @@ DataBinder.prototype = {
             });
         });
     },
-    createNotificationCallback: function(rowNumber, columnNumber) {
+    createNotificationCallback: function(row0Indexed, col0Indexed) {
         return function(value) {
-            this._notifyCellChange(rowNumber, columnNumber, value);
+            this._notifyCellChange(row0Indexed, col0Indexed, value);
         }.bind(this);
     },
-    _notifyCellChange: function(rowNumber, columnNumber, value) {
-        this.inputs.eq((rowNumber - 1) * 100 + columnNumber - 1).val(value);
+    _notifyCellChange: function(row0Indexed, col0Indexed, value) {
+        this.inputs.eq(row0Indexed * 100 + col0Indexed).val(value);
     },
-    getCellAt: function(rowNumber, columnNumber) {
-        return this.cells[rowNumber - 1][columnNumber - 1];
+    getCellAt: function(row1Indexed, col1Indexed) {
+        return this.cells[row1Indexed - 1][col1Indexed - 1];
     }
 };
